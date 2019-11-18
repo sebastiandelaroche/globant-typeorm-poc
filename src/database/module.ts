@@ -6,20 +6,15 @@ const optsDB: ConnectionOptions = {
   url: 'postgresql://root:password@0.0.0.0/trades_service',
   entities: [__dirname + '/entities/*.entity{.ts,.js}'],
   migrations: [__dirname + '/migrations/*{.ts,.js}'],
+  logging: ['error'],
 };
 
 export const init = async () => {
 
-  try {
+  const connection = await createConnection(optsDB);
 
-    const connection = await createConnection(optsDB);
+  await connection.runMigrations();
 
-    await connection.runMigrations();
-
-  } catch (error) {
-
-    console.error('Error: ', error);
-
-  }
+  return connection;
 
 };

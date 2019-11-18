@@ -8,11 +8,15 @@ export class Part {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column({ length: 36, unique: true, name: 'part_id' })
+  partId: string;
+
   @Column({ length: 36 })
   name: string;
 
-  @Column({ length: 36, unique: true })
-  partId: string;
+  @JoinColumn({ name: 'type_id' })
+  @OneToOne(type => PartType, partType => partType.id)
+  type: PartType;
 
   @Column({ length: 255, nullable: true })
   description: string;
@@ -23,12 +27,8 @@ export class Part {
   @Column({ nullable: true })
   system: string;
 
-  @Column({ type: 'json' })
+  @Column({ type: 'json', name: 'custom_fields' })
   customFields: any;
-
-  @JoinColumn()
-  @OneToOne(type => PartType, partType => partType.id)
-  type: PartType;
 
   @OneToMany(type => Version, version => version.part)
   versions: Version[];
