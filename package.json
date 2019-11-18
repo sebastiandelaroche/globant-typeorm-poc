@@ -1,0 +1,31 @@
+{
+  "name": "globant-typeorm-poc",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "repository": "https://github.com/sebastiandelaroche/globant-typeorm-poc.git",
+  "author": "Sebastian De La Roche <sebastian.delaroche.dev@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start-dev": "nodemon",
+    "start-prod": "node dist/index.js",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "migration-create": "yarn typeorm migration:create",
+    "migration-generate": "yarn typeorm migration:generate",
+    "migration-run": "yarn typeorm migration:run",
+    "migration-revert": "yarn typeorm migration:revert",
+    "docker-compose": "docker-compose up postgresql"
+  },
+  "dependencies": {
+    "pg": "^7.12.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.20"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.7",
+    "nodemon": "^1.19.4",
+    "ts-node": "^8.5.0",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^3.7.2"
+  }
+}
